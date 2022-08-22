@@ -1,13 +1,16 @@
-import React, {useState} from "react";
-import { v4 as uuidv4 } from 'uuid';
-export default function App(){
+ import React, {Component, useState} from "react";
+ import listadeContantos from "./Components/ListadeContatos";
+ import { v4 as uuidv4 } from 'uuid';
+ import contato from "./Components/Listadecontatos"
+ import contato from "./contato";
+ export default function App(){
 
 
-      //states
+         //states
         const [Contatos,setContato]= useState({nome:'', telefone:''})
         const [listadeContantos, setlistadeContatos]=useState([])
 
-       //metodos
+         //metodos
        function definirNome(event){
        setcontato({...contato, nome: event.target.value})
        }
@@ -16,8 +19,12 @@ export default function App(){
        }
         
         function adicionarContato(){
+         // validação dos campos
+         if(contato.nome  === "" || Contatos.telefone==="") return
+
+
+         // adicionar contato na lista
             setlistadecontatos([...listadeContantos, contato])
-            console.table(listadeContatos)
         }
 
         return (
@@ -35,17 +42,23 @@ export default function App(){
               </div>
               
               <button onclick={adicionarContato}> Adicionar Contato</button>
-      
+
+               {/*<ListadeContatos listadecontatos={listadecontatos}/>*/}
+
+               <ul>
+
+                     {listadeContatos.map(ct=>{
+                
+                     return <Contato nome={ct.nome}/>
+                
+                     })}
+
+               </ul>
+               
+          
           </>
 
         )
         
 
 }
-
- 
-  
-        
-
-
-
